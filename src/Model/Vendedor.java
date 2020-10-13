@@ -5,13 +5,15 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ramon
  */
 public class Vendedor extends Funcionario {
     private float comissao;
-    private Venda[] vendas;
+    private ArrayList<Venda> vendas;
     
     public void realizarVenda(Venda v, Cliente c) {
         
@@ -20,4 +22,12 @@ public class Vendedor extends Funcionario {
     public void calcularComissao() {
         
     }
+
+    public Vendedor(String nome, String cpf, double salario, float comissao) {
+        super(nome, cpf, salario);
+        this.comissao = comissao;
+        this.vendas = new ArrayList();
+    }
+    
+    
 }
