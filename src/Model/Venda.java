@@ -74,6 +74,6 @@ public class Venda implements Identificavel {
     }
 
     public String toString() {
-        return "Venda feita por " + this.vendedor.getNome() + " para " + this.cliente.getNome() + " de um " + this.carro.toString();
+        return "Venda " + this.codigo + " feita por " + this.vendedor.getNome() + " para " + this.cliente.getNome() + " de um " + this.carro.toString();
     }
 }

@@ -68,6 +68,7 @@ public class MainController {
         else {
             Venda v = new Venda(buscaVendedor(cpfV), buscaVeiculo(placa), buscaCliente(cpfC), valor, metodo);
             buscaVendedor(cpfV).realizarVenda(v);
+            v.setID(codigo);
             retorno.add("1");
             retorno.add(v.toString());
         }
