@@ -5,7 +5,11 @@
  */
 package Controller;
 
+import Model.Carro;
 import Model.Cliente;
+import Model.Veiculo;
+import Model.Vendedor;
+
 import java.util.ArrayList;
 
 /**
@@ -14,10 +18,13 @@ import java.util.ArrayList;
  */
 public class MainController {
     
-    private ArrayList<Cliente> clientes = new ArrayList();
+    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+    private ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+    private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
     
+
     public ArrayList<String> cadastrarCliente(String nome, String cpf) {
-        ArrayList<String> retorno = new ArrayList();
+        ArrayList<String> retorno = new ArrayList<String>();
         
         for(Cliente c : this.clientes) {
             if(c.getCpf().equals(cpf)) {
@@ -32,6 +39,45 @@ public class MainController {
         retorno.add("1");
         retorno.add(c.getNome());
         retorno.add(c.getCpf());
+        
+        return retorno;
+    }
+
+    public ArrayList<String> cadastrarVendedor(String nome, String cpf, String salario, String comissao) {
+        ArrayList<String> retorno = new ArrayList<String>();
+        
+        for(Vendedor c : this.vendedores) {
+            if(c.getCpf().equals(cpf)) {
+                retorno.add("0");
+                return retorno;
+            }
+        }
+        
+        Cliente c = new Cliente(nome, cpf);
+        
+        this.clientes.add(c);
+        retorno.add("1");
+        retorno.add(c.getNome());
+        retorno.add(c.getCpf());
+        
+        return retorno;
+    }
+
+    public ArrayList<String> cadastrarVeiculo(String montadora, String modelo, String motor, String cor, String ano, String placa, String combustivel) {
+        ArrayList<String> retorno = new ArrayList<String>();
+        
+        for(Veiculo c : this.veiculos) {
+            if(c.getPlaca().equals(placa)) {
+                retorno.add("0");
+                return retorno;
+            }
+        }
+        
+        Carro c = new Carro(montadora, modelo, motor, cor, ano, placa, combustivel);
+        
+        this.veiculos.add(c);
+        retorno.add("1");
+        retorno.add(c.toString());
         
         return retorno;
     }

@@ -12,5 +12,17 @@ package Model;
 public class Carro extends Veiculo {
     private String combustivel;
     
+    public Carro(String montadora, String modelo, String motor, String cor, String ano, String placa, String combustivel) {
+        super(montadora, modelo, motor, cor, ano, placa);
+        this.combustivel = combustivel;
+    }
     
+    public String getCombustivel() {
+        return combustivel;
+    }
+
+    public void setCombustivel(String combustivel) {
+        this.combustivel = combustivel;
+    }
+
 }

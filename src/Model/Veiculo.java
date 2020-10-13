@@ -14,8 +14,17 @@ public abstract class Veiculo {
     private String modelo;
     private String motor;
     private String cor;
-    private int ano;
+    private String ano;
     private String placa;
+
+    public Veiculo(String montadora, String modelo, String motor, String cor, String ano, String placa) {
+        this.montadora = montadora;
+        this.modelo = modelo;
+        this.motor = motor;
+        this.cor = cor;
+        this.ano = ano;
+        this.placa = placa;
+    }
     
     public void regularizarDoc() {
         
@@ -61,11 +70,11 @@ public abstract class Veiculo {
         this.cor = cor;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
@@ -75,5 +84,9 @@ public abstract class Veiculo {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public String toString() {
+        return this.montadora + this.modelo + this.ano + " - " + this.placa;
     }
 }
