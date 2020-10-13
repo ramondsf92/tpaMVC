@@ -9,7 +9,7 @@ package Model;
  *
  * @author ramon
  */
-public abstract class Funcionario {
+public abstract class Funcionario implements Identificavel {
     private String nome;
     private String cpf;
     private String salario;
@@ -24,6 +24,10 @@ public abstract class Funcionario {
         this.salario = salario;
     }
     
+    public String getID() {
+        return this.cpf;
+    }
+
     public String getCpf() {
         return cpf;
     }
@@ -48,4 +52,7 @@ public abstract class Funcionario {
         this.salario = salario;
     }
 
+    public String toString() {
+        return this.nome + " - " + this.cpf;
+    }
 }

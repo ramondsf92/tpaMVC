@@ -2,6 +2,7 @@
 package View;
 
 import Controller.MainController;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +15,8 @@ public class MainView {
     
     public void start() {
         MainController ctr = new MainController();
+        ctr.inserirExemplos();
+        int codVenda = 1;
         
         do {
             Scanner sc = new Scanner(System.in);
@@ -66,9 +69,30 @@ public class MainView {
                         System.out.println("CPF não encontrado!");
                     } */
                     break;
+                case 4:
+                    System.out.print("Insira a placa do carro a ser vendido: ");
+                    String placa = sc.nextLine();
+                    System.out.print("Insira o cpf do vendedor: ");
+                    String cpfVend = sc.nextLine();
+                    System.out.print("Insira o cpf do cliente: ");
+                    String cpfCliente = sc.nextLine();
+                    System.out.print("Insira o valor da venda: ");
+                    double valor = sc.nextDouble();
+                    System.out.print("Insira método de pagamento: ");
+                    String metodo = sc.nextLine();
+                    sc.next();
+                    
+                    ArrayList<String> dadosVenda = ctr.realizarVenda("V00" + codVenda, placa, cpfVend, cpfCliente, valor, metodo);
+                    if(dadosVenda.get(0).equals("0")) {
+                        System.out.println("Dados incorretos. Tente novamente.");
+                    }
+                    else
+                        System.out.println("Venda realizada com sucesso!\n" + dadosVenda.get(1));
+                    break;
                 default:
                     break;
             }
+            codVenda++;
             System.out.println("Aperte qualquer tecla para voltar...");
             String key = sc.nextLine();
             //sc.close();
@@ -84,15 +108,17 @@ public class MainView {
         
         final String opcoes = "Olá! Escolha uma das opções a seguir: \n"
                 + "1 - Cadastrar cliente\n"
-                + "2 - Cadastrar vendedor\n"
-                + "3 - Cadastrar veículo";
+                + "2 - Listar clientes\n"
+                + "3 - Cadastrar veículo\n"
+                + "4 - Realizar venda\n"
+                + "5 - Calcular comissão";
         
         System.out.println(opcoes);
         
         do {
             op = sc.nextInt();
         }
-        while(op < 1 || op > 3);
+        while(op < 1 || op > 10);
        // sc.close();
         return op;
         

@@ -9,7 +9,7 @@ package Model;
  *
  * @author ramon
  */
-public class Cliente {
+public class Cliente implements Identificavel {
     private String nome;
     private String cpf;
 
@@ -18,7 +18,9 @@ public class Cliente {
         this.cpf = cpf;
     }
     
-    
+    public String getID() {
+        return this.cpf;
+    }
     
     public void pagar(Venda v) {
         
@@ -44,5 +46,7 @@ public class Cliente {
         this.cpf = cpf;
     }
     
-    
+    public String toString() {
+        return this.nome + " - " + this.cpf;
+    }
 }

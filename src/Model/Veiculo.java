@@ -9,7 +9,7 @@ package Model;
  *
  * @author ramon
  */
-public abstract class Veiculo {
+public abstract class Veiculo implements Identificavel {
     private String montadora;
     private String modelo;
     private String motor;
@@ -26,6 +26,10 @@ public abstract class Veiculo {
         this.placa = placa;
     }
     
+    public String getID() {
+        return this.placa;
+    }
+
     public void regularizarDoc() {
         
     }

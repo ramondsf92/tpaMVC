@@ -8,6 +8,7 @@ package Controller;
 import Model.Carro;
 import Model.Cliente;
 import Model.Veiculo;
+import Model.Venda;
 import Model.Vendedor;
 
 import java.util.ArrayList;
@@ -21,7 +22,57 @@ public class MainController {
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
     private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+
+    public void inserirExemplos() {
+        this.clientes.add(new Cliente("Mário", "111"));
+        this.clientes.add(new Cliente("Tomás", "222"));
+        this.vendedores.add(new Vendedor("Cármen", "333", "2000", "0.1"));
+        this.vendedores.add(new Vendedor("Matilda", "444", "3000", "0.2"));
+        this.veiculos.add(new Carro("Renault", "Clio", "1.6", "Azul", "2005", "KPU0240", "Flex"));
+        this.veiculos.add(new Carro("Fiat", "Uno", "1.0", "Preto", "2017", "JDK2020", "Flex"));
+    }
     
+    public Cliente buscaCliente(String id) {
+        for(Cliente c : this.clientes) {
+            if(c.getID().equals(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Vendedor buscaVendedor(String id) {
+        for(Vendedor v : this.vendedores) {
+            if(v.getID().equals(id)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public Veiculo buscaVeiculo(String id) {
+        for(Veiculo c : this.veiculos) {
+            if(c.getID().equals(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> realizarVenda(String codigo, String placa, String cpfV, String cpfC, double valor, String metodo) {
+        ArrayList<String> retorno = new ArrayList<String>();
+        
+        if(buscaVeiculo(placa) == null || buscaVendedor(cpfV) == null || buscaCliente(cpfC) == null) {
+            retorno.add("0");
+        }
+        else {
+            Venda v = new Venda(buscaVendedor(cpfV), buscaVeiculo(placa), buscaCliente(cpfC), valor, metodo);
+            buscaVendedor(cpfV).realizarVenda(v);
+            retorno.add("1");
+            retorno.add(v.toString());
+        }
+        return retorno;
+    }
 
     public ArrayList<String> cadastrarCliente(String nome, String cpf) {
         ArrayList<String> retorno = new ArrayList<String>();
