@@ -5,11 +5,7 @@
  */
 package Controller;
 
-import Model.Carro;
-import Model.Cliente;
-import Model.Veiculo;
-import Model.Venda;
-import Model.Vendedor;
+import Model.*;
 
 import java.util.ArrayList;
 
@@ -72,6 +68,20 @@ public class MainController {
             retorno.add("1");
             retorno.add(v.toString());
         }
+        return retorno;
+    }
+
+    public String[] calcularComissao(String id) {
+        String nome = "";
+        String comissao = "";
+        for(Vendedor v : this.vendedores) {
+            if(v.getID().equals(id)) {
+                nome = v.getNome();
+                comissao = String.valueOf(v.calcularComissao());
+            }
+        }
+        String[] retorno = {nome, comissao};
+
         return retorno;
     }
 

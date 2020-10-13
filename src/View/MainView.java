@@ -89,6 +89,16 @@ public class MainView {
                     else
                         System.out.println("Venda realizada com sucesso!\n" + dadosVenda.get(1));
                     break;
+                case 5:
+                    System.out.print("Digite o CPF do vendedor para calcular o total de comissão: ");
+                    String cpfV = sc.nextLine();
+                    String[] totalComissao = ctr.calcularComissao(cpfV);
+                    if(totalComissao[1] == "") {
+                        System.out.println("Vendedor ainda não possui venda ou não está cadastrado.");
+                    }
+                    else {
+                        System.out.println("Vendedor " + totalComissao[0] + " possui " + totalComissao[1] + " de comissão.");
+                    }
                 default:
                     break;
             }
