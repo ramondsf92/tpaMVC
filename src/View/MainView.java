@@ -55,7 +55,7 @@ public class MainView {
                      System.out.println(retornoVeiculo.get(1));
                    }
                     else {
-                        System.out.println("Houve um erro ao cadastrar o cliente!");
+                        System.out.println("\nHouve um erro ao cadastrar o cliente!\n");
                     }
                     /* System.out.println("Digite o cpf do cliente a ser removido: ");
                     String cpf = sc.nextLine();
@@ -84,21 +84,35 @@ public class MainView {
                     
                     ArrayList<String> dadosVenda = ctr.realizarVenda("V00" + codVenda, placa, cpfVend, cpfCliente, valor, metodo);
                     if(dadosVenda.get(0).equals("0")) {
-                        System.out.println("Dados incorretos. Tente novamente.");
+                        System.out.println("\nDados incorretos. Tente novamente.\n");
+                    } else if(dadosVenda.get(0).equals("2")) {
+                        System.out.println("\nVeículo não está mais em estoque.\n");
                     }
                     else
-                        System.out.println("Venda realizada com sucesso!\n" + dadosVenda.get(1));
+                        System.out.println("\nVenda realizada com sucesso!\n" + dadosVenda.get(1));
                     break;
                 case 5:
                     System.out.print("Digite o CPF do vendedor para calcular o total de comissão: ");
                     String cpfV = sc.nextLine();
                     String[] totalComissao = ctr.calcularComissao(cpfV);
                     if(totalComissao[1] == "") {
-                        System.out.println("Vendedor ainda não possui venda ou não está cadastrado.");
+                        System.out.println("\nVendedor ainda não possui venda ou não está cadastrado.\n");
                     }
                     else {
-                        System.out.println("Vendedor " + totalComissao[0] + " possui " + totalComissao[1] + " de comissão.");
+                        System.out.println("\nVendedor " + totalComissao[0] + " possui " + totalComissao[1] + " de comissão.\n");
                     }
+                    break;
+                case 6:
+                    System.out.print("Digite a placa do carro que está sendo liberado.");
+                    String idPlaca = sc.nextLine();
+                    boolean liberado = ctr.liberarVeiculo(idPlaca);
+                    if(liberado) {
+                        System.out.println("\nVeículo liberado com sucesso.\n");
+                    }
+                    else {
+                        System.out.println("\nEste veículo já não se encontra mais no estoque.\n");
+                    }
+
                 default:
                     break;
             }
@@ -121,7 +135,8 @@ public class MainView {
                 + "2 - Listar clientes\n"
                 + "3 - Cadastrar veículo\n"
                 + "4 - Realizar venda\n"
-                + "5 - Calcular comissão";
+                + "5 - Calcular comissão\n"
+                + "6 - Liberar veículo";
         
         System.out.println(opcoes);
         

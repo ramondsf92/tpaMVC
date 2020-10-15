@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ramon
@@ -34,8 +36,12 @@ public abstract class Veiculo implements Identificavel {
         
     }
     
-    public void liberar() {
-        
+    public void liberar(ArrayList<Veiculo> veiculos) {
+        for(Veiculo v : veiculos) {
+            if(v.getID().equals(this.placa)) {
+                veiculos.remove(v);
+            }
+        }
     }
     
     public void calcularConsumo() {
