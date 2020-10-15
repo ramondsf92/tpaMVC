@@ -19,8 +19,12 @@ public class Vendedor extends Funcionario {
         vendas.add(v);
     }
     
-    public void calcularComissao() {
-        
+    public double calcularComissao() {
+        double total = 0;
+        for(Venda v : this.vendas) {
+            total = total + (v.getValorTotal() * Double.parseDouble(this.comissao));
+        }
+        return total;
     }
 
     public Vendedor(String nome, String cpf, String salario, String comissao) {

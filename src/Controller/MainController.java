@@ -5,11 +5,7 @@
  */
 package Controller;
 
-import Model.Carro;
-import Model.Cliente;
-import Model.Veiculo;
-import Model.Venda;
-import Model.Vendedor;
+import Model.*;
 
 import java.util.ArrayList;
 
@@ -62,9 +58,12 @@ public class MainController {
     public ArrayList<String> realizarVenda(String codigo, String placa, String cpfV, String cpfC, double valor, String metodo) {
         ArrayList<String> retorno = new ArrayList<String>();
         
-        if(buscaVeiculo(placa) == null || buscaVendedor(cpfV) == null || buscaCliente(cpfC) == null) {
+        if(buscaVendedor(cpfV) == null || buscaCliente(cpfC) == null) {
             retorno.add("0");
         }
+        else if(buscaVeiculo(placa) == null) {
+            retorno.add("2");
+        } 
         else {
             Venda v = new Venda(buscaVendedor(cpfV), buscaVeiculo(placa), buscaCliente(cpfC), valor, metodo);
             buscaVendedor(cpfV).realizarVenda(v);
@@ -73,6 +72,30 @@ public class MainController {
             retorno.add(v.toString());
         }
         return retorno;
+    }
+
+    public String[] calcularComissao(String id) {
+        String nome = "";
+        String comissao = "";
+        for(Vendedor v : this.vendedores) {
+            if(v.getID().equals(id)) {
+                nome = v.getNome();
+                comissao = String.valueOf(v.calcularComissao());
+            }
+        }
+        String[] retorno = {nome, comissao};
+
+        return retorno;
+    }
+
+    public boolean liberarVeiculo(String id) {
+        for(Veiculo v : this.veiculos) {
+            if(v.getID().equals(id)) {
+                v.liberar(this.veiculos);
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<String> cadastrarCliente(String nome, String cpf) {
